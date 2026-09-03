@@ -15,13 +15,26 @@
     @font-face { font-family: 'The Seasons'; src: url('assets/fonts/the-seasons/Demo_Fonts/Fontspring-DEMO-theseasons-bd.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
     body, button, input, select, .reader-content { font-family: 'Josefin Sans', ui-sans-serif, system-ui, sans-serif; }
     h1, h2, h3, .brand, .hero-card .big, .kpi strong, .profile-value, .model-score, .reader-head strong, .reader-md h1, .reader-md h2, .reader-md h3 { font-family: 'The Seasons', Georgia, serif; }
+    body { font-weight: 300; background:radial-gradient(ellipse 72vw 65vh at 80% 0%,rgba(140,40,53,.22),transparent 74%),var(--bg); background-attachment:fixed; }
+    button { font-weight: 500; }
+    .eyebrow { font-weight: 600; }
+    .model-field label, .model-result .overline, .kpi span, .reader-code summary { font-weight: 500; }
+    .hero { overflow: hidden; }
+    .hero:after { display:none; }
+    nav a { position:relative; padding:25px 0 22px; transition:color .18s ease; }
+    nav a::after { content:""; position:absolute; right:0; bottom:13px; left:0; height:2px; background:var(--gold); border-radius:2px; transform:scaleX(0); transform-origin:center; transition:transform .18s ease; }
+    nav a[aria-current="page"] { color:var(--gold-light); }
+    nav a[aria-current="page"]::after { transform:scaleX(1); }
+    footer .shell { display:flex; align-items:center; justify-content:space-between; gap:18px; }
+    .kinsei-logo { width:30px; height:30px; object-fit:contain; flex:none; }
+    @media(max-width:560px) { nav a { padding:21px 0 18px; } nav a::after { bottom:10px; } footer .shell { gap:12px; } }
   </style>
 </head>
 <body>
   <a class="skip" href="#contenido">Saltar al análisis</a>
-  <header class="top"><div class="shell"><a class="brand" href="#inicio"><span>◒</span>Portafolio · Wine quality</a><nav aria-label="Navegación"><a href="#hallazgos">Hallazgos</a><a href="#comparar">Comparar</a><a href="#metodo">Método</a><a href="#notebook">Notebook</a></nav></div></header>
+  <header class="top"><div class="shell"><a class="brand" href="#inicio"><span>◒</span>Portafolio · Wine quality</a><nav aria-label="Navegación"><a href="#hallazgos" data-section="hallazgos">Hallazgos</a><a href="#comparar" data-section="comparar">Comparar</a><a href="#metodo" data-section="metodo">Método</a><a href="#modelo" data-section="modelo">Modelo predictivo</a><a href="#notebook" data-section="notebook">Notebook</a></nav></div></header>
   <main id="contenido"><div class="shell">
-    <section class="hero" id="inicio"><div class="hero-copy"><p class="eyebrow">Análisis de datos · Vinho Verde</p><h1>La calidad no se entiende mezclando todos los vinos.</h1><p>Este portafolio explora cómo cambian las señales químicas de calidad entre tintos, blancos secos y perfiles con mayor dulzor relativo. El modelo es secundario: aquí importan los patrones, las comparaciones y sus límites.</p><a class="button primary" href="#hallazgos">Explorar los hallazgos</a></div><aside class="hero-card"><p class="eyebrow">Pregunta guía</p><span class="big">¿Qué cambia?</span><p>En vez de buscar una receta única de buen vino, comparamos cada estilo dentro de un contexto químico más coherente.</p><div class="mini-rule"></div><p><strong style="color:var(--gold-light)">Interacción:</strong> cambia ejes, segmentos y variables; los gráficos se actualizan con las 5.320 observaciones.</p></aside></section>
+    <section class="hero" id="inicio"><div class="hero-copy"><p class="eyebrow">Análisis de Datos - Muestra Portfolio</p><h1>La calidad no se entiende mezclando todos los vinos.</h1><p>Este portafolio explora cómo cambian las señales químicas de calidad entre tintos, blancos secos y perfiles con mayor dulzor relativo. El modelo es secundario: aquí importan los patrones, las comparaciones y sus límites.</p><a class="button primary" href="#hallazgos">Explorar los hallazgos</a></div><aside class="hero-card"><p class="eyebrow">Pregunta guía</p><span class="big">¿Qué cambia?</span><p>En vez de buscar una receta única de buen vino, comparamos cada estilo dentro de un contexto químico más coherente.</p><div class="mini-rule"></div><p><strong style="color:var(--gold-light)">Interacción:</strong> cambia ejes, segmentos y variables; los gráficos se actualizan con las 5.320 observaciones.</p></aside></section>
     <section class="section" id="hallazgos"><div class="section-head"><div><p class="eyebrow">Base y alcance</p><h2>El conjunto se vuelve útil cuando se puede comparar.</h2><p>Las mediciones se muestran en unidades químicas recuperadas de la transformación original. Los segmentos son lentes analíticos, no estilos comerciales certificados.</p></div><p id="data-status" class="source-note" role="status">Cargando datos…</p></div><div class="kpis"><article class="kpi"><span>Vinos analizados</span><strong id="rows">—</strong><small>Filas limpias del proyecto.</small></article><article class="kpi"><span>Tinto no dulce</span><strong id="red-count">—</strong><small>Comparación dentro del segmento.</small></article><article class="kpi"><span>Blanco no dulce</span><strong id="white-count">—</strong><small>Comparación dentro del segmento.</small></article><article class="kpi"><span>Dulce candidato</span><strong id="sweet-count">—</strong><small>Hipótesis de dulzor frente a acidez.</small></article></div></section>
     <section class="section" id="comparar"><div class="section-head"><div><p class="eyebrow">Exploración interactiva</p><h2>Cuatro formas de mirar la misma base.</h2><p>Las visualizaciones se complementan: composición química, distribución de calidad, rangos de alto desempeño y asociación por segmento. No convierten correlación en causalidad.</p></div></div>
       <div class="chart-grid"><article class="panel"><div class="panel-head"><div><h3>Mapa químico de perfiles</h3><p>Selecciona dos mediciones de laboratorio; el color conserva el segmento analítico.</p></div><div class="controls"><select id="x-axis" aria-label="Variable eje horizontal"></select><select id="y-axis" aria-label="Variable eje vertical"></select></div></div><div class="panel-body"><svg class="chart" id="scatter" viewBox="0 0 710 410" role="img" aria-labelledby="scatter-title scatter-desc"><title id="scatter-title">Mapa químico de vinos</title><desc id="scatter-desc">Cargando datos.</desc></svg><div class="legend"><span><i style="background:#dc6873"></i>Tinto no dulce</span><span><i style="background:#e7b64d"></i>Blanco no dulce</span><span><i style="background:#a47dc7"></i>Candidato dulce</span></div></div></article><aside class="panel"><div class="panel-head"><div><h3>Cómo leer el mapa</h3><p>Una observación por punto, con información al pasar el cursor.</p></div></div><div class="panel-body analysis-copy"><p id="scatter-story">Elige los ejes para buscar grupos, extremos o solapamientos entre segmentos.</p><div class="takeaway"><strong>Lectura recomendada:</strong> comienza con alcohol y azúcar residual; luego contrasta densidad y acidez volátil. Las zonas superpuestas muestran por qué un único modelo global puede mezclar señales.</div></div></aside></div>
@@ -34,7 +47,7 @@
   </div></main>
   <div class="tooltip hidden" id="tooltip" role="status"></div>
   <dialog class="notebook-reader" id="notebook-reader" aria-labelledby="reader-title"><div class="reader-shell"><header class="reader-head"><div><strong id="reader-title">Notebook de portafolio</strong><p>Análisis completo: narrativa, código, tablas y gráficos.</p></div><button class="reader-close" id="close-notebook" type="button">Cerrar ×</button></header><article class="reader-content" id="reader-content"><p class="source-note">Preparando notebook…</p></article></div></dialog>
-  <footer><div class="shell">Portafolio de análisis de calidad de vinos · <a href="https://github.com/KinGaetes/wine-quality-segmentation">Repositorio en GitHub</a></div></footer>
+  <footer><div class="shell"><span>Portafolio de análisis de calidad de vinos · <a href="https://github.com/KinGaetes/wine-quality-segmentation">Repositorio en GitHub</a></span><img class="kinsei-logo" src="Kinsei_Logo.svg" alt="Kinsei"></div></footer>
   <script>
   (()=>{'use strict';
   const F=['fixed_acidity','volatile_acidity','citric_acid','residual_sugar','chlorides','free_sulfur_dioxide','total_sulfur_dioxide','density','ph','sulphates','alcohol'];
@@ -178,6 +191,22 @@
       document.getElementById('run-model').addEventListener('click', run);
       document.getElementById('reset-model').addEventListener('click', typical);
       load();
+    })();
+  </script>
+  <script>
+    (() => {
+      const links = [...document.querySelectorAll('nav a[data-section]')];
+      const sections = links.map(link => document.getElementById(link.dataset.section)).filter(Boolean);
+      const setActive = id => links.forEach(link => {
+        if (link.dataset.section === id) link.setAttribute('aria-current', 'page');
+        else link.removeAttribute('aria-current');
+      });
+      const observer = new IntersectionObserver(entries => {
+        const active = entries.filter(entry => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (active) setActive(active.target.id);
+      }, { rootMargin: '-24% 0px -62% 0px', threshold: [0, .08, .2, .45] });
+      sections.forEach(section => observer.observe(section));
+      setActive('hallazgos');
     })();
   </script>
 </body>
